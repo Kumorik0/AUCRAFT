@@ -5,7 +5,7 @@ using UnityEngine;
 public class BuildSystem : MonoBehaviour
 {
 
-    // Refernce to the BlockSystem script
+    // Reference to the BlockSystem script
     private BlockSystem blockSys;
 
     // Variables to hold data regarding currect block type

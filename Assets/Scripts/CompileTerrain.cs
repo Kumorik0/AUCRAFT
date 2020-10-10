@@ -126,8 +126,8 @@ public class CompileTerrain : MonoBehaviour
             depth = blck.x != lastx ? 0 : depth;
             lasty = blck.x != lastx ? blck.y + 1 : lasty;
 
-            selectedTile = depth < 4 ? grassTile : stoneTile;
-            selectedTile = 3 < depth && depth < 30 ? dirtTile : selectedTile;
+            selectedTile = depth < 1 ? grassTile : stoneTile;
+            selectedTile = 0 < depth && depth < 15 ? dirtTile : selectedTile;
 
             grid.SetTile(blck, selectedTile);
 
@@ -160,7 +160,7 @@ public class CompileTerrain : MonoBehaviour
         AccidentalNoise.Gradient ground_gradient = new AccidentalNoise.Gradient(0, 0, 0, 1);
 
         // lowlands
-        Fractal lowland_shape_fractal = new Fractal(FractalType.BILLOW, BasisTypes.GRADIENT, InterpTypes.QUINTIC, 1, 0.25, seed);
+        Fractal lowland_shape_fractal = new Fractal(FractalType.BILLOW, BasisTypes.GRADIENT, InterpTypes.QUINTIC, 1, .25, seed);
         AutoCorrect lowland_autocorrect = new AutoCorrect(lowland_shape_fractal, 0, 1);
         ScaleOffset lowland_scale = new ScaleOffset(0.125, -0.45, lowland_autocorrect);
         ScaleDomain lowland_y_scale = new ScaleDomain(lowland_scale, null, 0);
@@ -185,7 +185,7 @@ public class CompileTerrain : MonoBehaviour
         AutoCorrect terrain_autocorrect = new AutoCorrect(terrain_type_fractal, 0, 1);
         ScaleDomain terrain_type_y_scale = new ScaleDomain(terrain_autocorrect, null, 0);
         AccidentalNoise.Cache terrain_type_cache = new AccidentalNoise.Cache(terrain_type_y_scale);
-        Select highland_mountain_select = new Select(terrain_type_cache, highland_terrain, mountain_terrain, 0.55, 0.2);
+        Select highland_mountain_select = new Select(terrain_type_cache, highland_terrain, mountain_terrain, 1, .5);
         Select highland_lowland_select = new Select(terrain_type_cache, lowland_terrain, highland_mountain_select, 0.25, 0.15);
         AccidentalNoise.Cache highland_lowland_select_cache = new AccidentalNoise.Cache(highland_lowland_select);
         Select ground_select = new Select(highland_lowland_select_cache, 0, 1, 0.5, null);
@@ -195,7 +195,7 @@ public class CompileTerrain : MonoBehaviour
         Bias cave_attenuate_bias = new Bias(highland_lowland_select_cache, 0.55);
         Combiner cave_shape_attenuate = new Combiner(CombinerTypes.MULT, cave_shape, cave_attenuate_bias);
         Fractal cave_perturb_fractal = new Fractal(FractalType.FBM, BasisTypes.GRADIENT, InterpTypes.QUINTIC, 6, 3, seed);
-        ScaleOffset cave_perturb_x_scale = new ScaleOffset(0.75, 0, cave_perturb_fractal);
+        ScaleOffset cave_perturb_x_scale = new ScaleOffset(0.75, 100, cave_perturb_fractal);
         ScaleOffset cave_perturb_y_scale = new ScaleOffset(1, 0, cave_perturb_fractal);
         TranslatedDomain cave_perturb = new TranslatedDomain(cave_shape_attenuate, cave_perturb_x_scale, cave_perturb_y_scale);
         Select cave_select = new Select(cave_perturb, 1, 0, 0.85, 0);
