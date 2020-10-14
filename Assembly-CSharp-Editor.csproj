@@ -55,8 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Tileset Overflow Tool\Editor\TextureExporter.cs" />
-     <Compile Include="Assets\Tileset Overflow Tool\Editor\TilemapOverflow.cs" />
+     <Compile Include="Assets\Editor\InventoryUI.cs" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/first/OneDrive/Documents/GAME CREATIONS/AUCRAFT/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>

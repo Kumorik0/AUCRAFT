@@ -24,7 +24,6 @@ public class BasicMovement : MonoBehaviour
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             float jumpVelocity = 25f;
-            Debug.Log("jump");
             rb2D.velocity = Vector2.up * jumpVelocity;
         }
 
@@ -43,7 +42,7 @@ public class BasicMovement : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontal, 0.0f, vertical);
 
-        // You have to maintain the current speed in the Y direction or else other Y velocities will be slowed. To do this, set the y-velocity to the value it already is.
+        // You have to maintain the current speed in the Y direction or else other Y velocities will be limited. To do this, set the y-velocity to the value it already is.
         rb2D.velocity = movement.normalized * speedMod + new Vector3(0.0f, rb2D.velocity.y, 0.0f);
     }
 }
